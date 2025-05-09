@@ -20,13 +20,13 @@
       background: linear-gradient(135deg, #ffe0f0, #ffd3ec, #f5faff, #ffe6f7);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      min-height: 100vh;  /* Allow content to extend beyond screen height */
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;  /* Align elements to the top of the screen */
-      flex-direction: column;  /* Ensure elements are stacked vertically */
-      overflow-x: hidden;  /* Hide horizontal scroll */
-      overflow-y: auto;  /* Enable vertical scroll */
+      align-items: center;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     @keyframes gradientBG {
@@ -38,12 +38,14 @@
     .card {
       background: rgba(255, 255, 255, 0.93);
       border-radius: 32px;
-      padding: 40px 30px;
-      max-width: 80%;
+      padding: 50px 45px;
+      max-width: 700px;
       text-align: center;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
       animation: fadeIn 1.6s ease;
       position: relative;
+      z-index: 1;
+      backdrop-filter: blur(10px); /* Adds a cool background blur effect */
     }
 
     @keyframes fadeIn {
@@ -53,13 +55,14 @@
 
     h1 {
       font-family: 'Parisienne', cursive;
-      font-size: 3rem;
+      font-size: 4rem;
       letter-spacing: 1px;
       background: linear-gradient(90deg, #ff4fd8, #ffa8e7, #fcbad3, #80d0ff);
       background-size: 300% 300%;
       color: transparent;
       -webkit-background-clip: text;
       animation: shineText 6s linear infinite;
+      text-shadow: 0 0 20px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.7);
     }
 
     @keyframes shineText {
@@ -76,6 +79,7 @@
       color: transparent;
       font-weight: 600;
       animation: rainbowMove 6s linear infinite;
+      text-shadow: 0 0 10px rgba(255, 182, 255, 0.8);
     }
 
     @keyframes rainbowMove {
@@ -86,7 +90,7 @@
 
     p {
       font-family: 'Quicksand', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #444;
       margin: 18px 0;
       line-height: 1.6;
@@ -119,14 +123,35 @@
       padding: 16px 30px;
       border-radius: 30px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.1rem;
       box-shadow: 0 8px 18px rgba(255, 105, 180, 0.3);
       transition: 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .btns a:hover {
       transform: scale(1.08);
       box-shadow: 0 12px 30px rgba(255, 105, 180, 0.5);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* 3D Button effect */
+    .btns a::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.3s ease-out;
+    }
+
+    .btns a:hover::after {
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .sparkle {
@@ -145,11 +170,33 @@
       50% { transform: scale(1.4); opacity: 1; }
     }
 
-    @media screen and (max-width: 600px) {
-      body {
-        background-size: 500% 500%;
-      }
+    /* Floating particles */
+    .floating-particles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 182, 255, 0.8);
+      animation: particleMove 5s infinite ease-in-out;
+    }
+
+    @keyframes particleMove {
+      0% { transform: translate(0, 0); opacity: 1; }
+      50% { transform: translate(50px, -50px); opacity: 0.5; }
+      100% { transform: translate(0, 0); opacity: 1; }
+    }
+
+    @media screen and (max-width: 600px) {
       .card {
         padding: 30px 20px;
         max-width: 90%;
@@ -194,6 +241,7 @@
     </div>
   </div>
 
+  <!-- Floating sparkles -->
   <script>
     for (let i = 0; i < 30; i++) {
       const sparkle = document.createElement("div");
@@ -206,6 +254,21 @@
     }
   </script>
 
+  <!-- Floating particles -->
+  <div class="floating-particles">
+    <!-- Randomly generate particles -->
+    <script>
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.top = Math.random() * 100 + "vh";
+        particle.style.left = Math.random() * 100 + "vw";
+        document.querySelector('.floating-particles').appendChild(particle);
+      }
+    </script>
+  </div>
+
+  <!-- Background romantic music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
     Your browser does not support the audio element.
