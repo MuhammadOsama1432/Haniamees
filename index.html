@@ -20,11 +20,13 @@
       background: linear-gradient(135deg, #ffe0f0, #ffd3ec, #f5faff, #ffe6f7);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      height: 100vh;
+      min-height: 100vh;  /* Change from height to min-height */
       display: flex;
       justify-content: center;
-      align-items: center;
-      overflow: hidden;
+      align-items: flex-start;  /* Changed from center to flex-start */
+      flex-direction: column;  /* Added to stack elements vertically */
+      overflow-x: hidden;  /* Prevent horizontal scroll */
+      overflow-y: auto;  /* Allow vertical scroll */
     }
 
     @keyframes gradientBG {
@@ -143,7 +145,6 @@
       50% { transform: scale(1.4); opacity: 1; }
     }
 
-    /* Make the background fixed on smaller screens */
     @media screen and (max-width: 600px) {
       body {
         background-size: 500% 500%;
@@ -193,7 +194,6 @@
     </div>
   </div>
 
-  <!-- Floating sparkles -->
   <script>
     for (let i = 0; i < 30; i++) {
       const sparkle = document.createElement("div");
@@ -206,7 +206,6 @@
     }
   </script>
 
-  <!-- Background romantic music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
     Your browser does not support the audio element.
