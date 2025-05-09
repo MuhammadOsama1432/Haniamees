@@ -20,13 +20,13 @@
       background: linear-gradient(135deg, #ffe0f0, #ffd3ec, #f5faff, #ffe6f7);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      min-height: 100vh;  /* Change from height to min-height */
+      min-height: 100vh;  /* Allow content to extend beyond screen height */
       display: flex;
       justify-content: center;
-      align-items: flex-start;  /* Changed from center to flex-start */
-      flex-direction: column;  /* Added to stack elements vertically */
-      overflow-x: hidden;  /* Prevent horizontal scroll */
-      overflow-y: auto;  /* Allow vertical scroll */
+      align-items: flex-start;  /* Align elements to the top of the screen */
+      flex-direction: column;  /* Ensure elements are stacked vertically */
+      overflow-x: hidden;  /* Hide horizontal scroll */
+      overflow-y: auto;  /* Enable vertical scroll */
     }
 
     @keyframes gradientBG {
